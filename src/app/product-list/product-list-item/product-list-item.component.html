@@ -1,13 +1,10 @@
-<div class="card product-list__card cursor-pointer">
+<div class="card product-list__card cursor-pointer" [routerLink]="[product.id]">
   <img [src]="product.image" class="card-img-top" [alt]="product.title">
   <div class="card-body">
     <h5 class="card-title">{{ product.title }}</h5>
     <p class="card-text">{{ product.desc }}</p>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-outline-primary px-2" (click)="$event.stopPropagation();">
-        <fa-icon icon="plus" class="mx-1"></fa-icon>
-        <fa-icon icon="shopping-cart" class="mx-1"></fa-icon>
-      </button>
+      <app-add-to-card-button></app-add-to-card-button>
     </div>
   </div>
 </div>
