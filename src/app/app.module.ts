@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPlus, faShoppingCart, faUser, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faShoppingCart, faUser, faArrowLeft, faPlusCircle, faMinusCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { AddToCardButtonComponent } from './shared/add-to-card-button/add-to-card-button.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddToCardButtonComponent } from './shared/add-to-card-button/add-to-car
     ProductListComponent,
     ProductListItemComponent,
     ProductCardComponent,
-    AddToCardButtonComponent
+    AddToCardButtonComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,6 @@ import { AddToCardButtonComponent } from './shared/add-to-card-button/add-to-car
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faUser, faShoppingCart, faPlus, faArrowLeft);
+    library.addIcons(faUser, faShoppingCart, faPlus, faArrowLeft, faPlusCircle, faMinusCircle, faTimes);
   }
 }
