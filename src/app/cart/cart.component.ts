@@ -9,6 +9,7 @@ import { AddToCartFacadeService } from 'services/add-to-cart-facade.service';
 import { ChangeQuantityActionsEnum } from 'models/enums/change-quantity-actions.enum';
 import * as fromApp from 'store/app.reducer';
 import * as CartSelectors from './store/cart.selectors';
+import * as CartActions from './store/cart.actions';
 
 @Component({
   selector: 'app-cart',
@@ -36,5 +37,13 @@ export class CartComponent implements OnInit {
 
   public trackById(index: number, product: CartProduct): number {
     return product.id;
+  }
+
+  public onRemoveProduct(product: CartProduct): void {
+    this.store.dispatch(CartActions.removeProductFromCart({ id: product.id }));
+  }
+
+  public onResetCart(): void {
+    this.store.dispatch(CartActions.resetCart());
   }
 }

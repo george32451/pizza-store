@@ -27,6 +27,17 @@ const cartReducer = createReducer(
       totalPrice: state.totalPrice + product.price
     };
   }),
+  on(CartActions.removeProductFromCart, (state, { id }) => {
+    const productToDelete = state.products.find(product => product.id === id);
+    const updatedProducts = state.products.filter(product => product.id !== id);
+
+    return {
+      ...state,
+      products: updatedProducts,
+      totalCount: state.totalCount - productToDelete.quantity,
+      totalPrice: state.totalPrice - productToDelete.price * productToDelete.quantity
+    };
+  }),
   on(CartActions.incProductQuantity, ((state, { id }) => {
     const cartProductIndex = state.products.findIndex(product => product.id === id);
     const updatedCartProduct = { ...state.products[cartProductIndex]  };
@@ -57,7 +68,13 @@ const cartReducer = createReducer(
       totalCount: state.totalCount - 1,
       totalPrice: state.totalPrice - cartProduct.price
     };
-  }))
+  })),
+  on(CartActions.resetCart, (state => ({
+    ...state,
+    products: [],
+    totalCount: 0,
+    totalPrice: 0
+  })))
 );
 
 export function reducer(state: State | undefined, action: Action): State {
