@@ -1,6 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+
 import { Product } from 'models/interfaces/product.interface';
+import { ChangeQuantityActionsEnum } from 'models/enums/change-quantity-actions.enum';
+import { AddToCartFacadeService } from 'services/add-to-cart-facade.service';
+import * as CartSelectors from 'cart/store/cart.selectors';
 
 @Component({
   selector: 'app-product-list-item',
@@ -9,9 +15,15 @@ import { Product } from 'models/interfaces/product.interface';
 })
 export class ProductListItemComponent implements OnInit {
   @Input() public readonly product: Product;
-  constructor() { }
+  public productQuantity$: Observable<number>;
+
+  constructor(private store: Store, private addToCartService: AddToCartFacadeService) { }
 
   ngOnInit(): void {
+    this.productQuantity$ = this.store.pipe(select(CartSelectors.getProductQuantityByID, { id: this.product.id }));
   }
 
+  public onChangeProductQuantity(event: ChangeQuantityActionsEnum): void {
+    this.addToCartService.changeProductQuantity(event, this.product);
+  }
 }

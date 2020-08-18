@@ -13,11 +13,11 @@ import { HeaderComponent } from './header/header.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { AddToCartButtonComponent } from './shared/add-to-cart-button/add-to-cart-button.component';
 import { CartComponent } from './cart/cart.component';
 import { SigninFormComponent } from './signin-form/signin-form.component';
-import * as fromApp from './store/app.reducer';
+import { ChangeProductQuantityComponent } from './shared/change-product-quantity/change-product-quantity.component';
 import { environment } from '../environments/environment';
+import * as fromApp from './store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -26,9 +26,9 @@ import { environment } from '../environments/environment';
     ProductListComponent,
     ProductListItemComponent,
     ProductCardComponent,
-    AddToCartButtonComponent,
     CartComponent,
-    SigninFormComponent
+    SigninFormComponent,
+    ChangeProductQuantityComponent
   ],
   imports: [
     BrowserModule,
