@@ -5,13 +5,13 @@
         <fa-icon icon="arrow-left" class="mr-1"></fa-icon>
         Go Back
       </button>
-      <div class="card">
-        <img src="" class="card-img-top" alt="">
+      <div class="card" *ngIf="(product$ | async) as product">
+        <img [src]="product.image" class="card-img-top" [alt]="product.title">
         <div class="card-body">
-          <h5 class="card-title">Some title</h5>
-          <p class="card-text">Some description</p>
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text">{{ product.desc }}</p>
           <div class="d-flex justify-content-end">
-            <app-add-to-card-button></app-add-to-card-button>
+            <app-add-to-cart-button [product]="product"></app-add-to-cart-button>
           </div>
         </div>
       </div>

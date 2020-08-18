@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddToCardButtonComponent } from './add-to-card-button.component';
+import { AddToCartButtonComponent } from './add-to-cart-button.component';
 
-describe('AddToCardButtonComponent', () => {
-  let component: AddToCardButtonComponent;
-  let fixture: ComponentFixture<AddToCardButtonComponent>;
+describe('AddToCartButtonComponent', () => {
+  let component: AddToCartButtonComponent;
+  let fixture: ComponentFixture<AddToCartButtonComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddToCardButtonComponent ]
+      declarations: [ AddToCartButtonComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddToCardButtonComponent);
+    fixture = TestBed.createComponent(AddToCartButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

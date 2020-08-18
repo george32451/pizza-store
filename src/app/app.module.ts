@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faShoppingCart, faUser, faArrowLeft, faPlusCircle, faMinusCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,9 +13,11 @@ import { HeaderComponent } from './header/header.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { AddToCardButtonComponent } from './shared/add-to-card-button/add-to-card-button.component';
+import { AddToCartButtonComponent } from './shared/add-to-cart-button/add-to-cart-button.component';
 import { CartComponent } from './cart/cart.component';
 import { SigninFormComponent } from './signin-form/signin-form.component';
+import * as fromApp from './store/app.reducer';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,7 @@ import { SigninFormComponent } from './signin-form/signin-form.component';
     ProductListComponent,
     ProductListItemComponent,
     ProductCardComponent,
-    AddToCardButtonComponent,
+    AddToCartButtonComponent,
     CartComponent,
     SigninFormComponent
   ],
@@ -30,7 +34,16 @@ import { SigninFormComponent } from './signin-form/signin-form.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    StoreModule.forRoot(fromApp.appReducer, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+      },
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

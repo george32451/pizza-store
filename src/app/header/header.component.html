@@ -9,7 +9,11 @@
         </span>
         <span routerLink="cart" class="cursor-pointer">
           <fa-icon icon="shopping-cart" size="lg"></fa-icon>
-          <sup><span class="badge badge-danger">9</span></sup>
+          <ng-container *ngIf="(productsCounter$ | async) as productsCounter">
+            <sup *ngIf="productsCounter > 0">
+              <span class="badge badge-danger">{{ productsCounter }}</span>
+            </sup>
+          </ng-container>
         </span>
       </div>
     </div>
