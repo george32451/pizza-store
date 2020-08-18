@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Product } from 'models/product.interface';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+
+import { Product } from 'models/interfaces/product.interface';
+import * as fromApp from 'store/app.reducer';
 
 @Component({
   selector: 'app-product-list',
@@ -8,36 +13,15 @@ import { Product } from 'models/product.interface';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  public products: Product[] = [
-    {
-      id: 1,
-      title: 'Some Title',
-      desc: 'Some description',
-      image: ''
-    },
-    {
-      id: 2,
-      title: 'Some Title',
-      desc: 'Some description',
-      image: ''
-    },
-    {
-      id: 3,
-      title: 'Some Title',
-      desc: 'Some description',
-      image: ''
-    },
-    {
-      id: 4,
-      title: 'Some Title',
-      desc: 'Some description',
-      image: ''
-    },
-  ];
+  public products$: Observable<Product[]>;
 
-  constructor() { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
+    this.products$ = this.store.pipe(
+      select('productList'),
+      map(productList => productList.products)
+    );
   }
 
   public trackById(index: number, product: Product): number {
