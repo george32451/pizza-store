@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-end">
+  <ng-container *ngIf="productQuantity === 0; else plusMinusButtons">
+    <button class="btn btn-outline-primary px-2"
+            (click)="$event.stopPropagation(); onChangeProductQuantity(changeQuantityActions.ADD)">
+      <fa-icon icon="plus" class="mx-1"></fa-icon>
+      <fa-icon icon="shopping-cart" class="mx-1"></fa-icon>
+    </button>
+  </ng-container>
+</div>
+
+<ng-template #plusMinusButtons>
+  <div class="plus-minus-container d-flex align-items-center">
+    <button class="btn btn-outline-primary btn-circle"
+            (click)="$event.stopPropagation(); onChangeProductQuantity(changeQuantityActions.DECREMENT)">
+      <fa-icon icon="minus-circle" size="lg"></fa-icon>
+    </button>
+    <span class="product-count mx-2">{{ productQuantity }}</span>
+    <button class="btn btn-outline-primary btn-circle"
+            (click)="$event.stopPropagation(); onChangeProductQuantity(changeQuantityActions.INCREMENT)">
+      <fa-icon icon="plus-circle" size="lg"></fa-icon>
+    </button>
+  </div>
+</ng-template>

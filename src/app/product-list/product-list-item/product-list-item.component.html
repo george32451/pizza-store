@@ -3,8 +3,10 @@
   <div class="card-body">
     <h5 class="card-title">{{ product.title }}</h5>
     <p class="card-text">{{ product.desc }}</p>
-    <div class="d-flex justify-content-end">
-      <app-add-to-cart-button [product]="product"></app-add-to-cart-button>
-    </div>
+    <app-change-product-quantity
+      [product]="product"
+      [productQuantity]="productQuantity$ | async"
+      (changeQuantity)="onChangeProductQuantity($event)">
+    </app-change-product-quantity>
   </div>
 </div>

@@ -1,3 +1,7 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+
 .prime-container {
   flex: 1;
 }
@@ -12,4 +16,28 @@
 
 .text-container__price, .product-count, .total__price  {
   font-size: 27px;
+}
+
+.reset-cart {
+  color: #3A3A3A;
+  font-size: 15px;
+  line-height: .9;
+  border-bottom: 1px dashed;
+  text-decoration: none;
+}
+
+.reset-cart:hover {
+  border-bottom: none;
+}
+
+.cart-empty-title {
+  font-size: 52px;
+  font-weight: 100;
+  color: #bbb;
+}
+
+@include media-breakpoint-down(md) {
+  .cart-empty-title {
+    font-size: 36px;
+  }
 }
