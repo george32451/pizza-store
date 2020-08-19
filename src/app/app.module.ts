@@ -19,6 +19,9 @@ import { ChangeProductQuantityComponent } from './shared/change-product-quantity
 import { environment } from '../environments/environment';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import * as fromAppMetareducers from './store/app.metareducer';
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     StoreModule.forRoot(fromApp.appReducer, {
       runtimeChecks: {
         strictStateImmutability: true,
