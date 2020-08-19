@@ -18,6 +18,7 @@ import { SigninFormComponent } from './signin-form/signin-form.component';
 import { ChangeProductQuantityComponent } from './shared/change-product-quantity/change-product-quantity.component';
 import { environment } from '../environments/environment';
 import * as fromApp from './store/app.reducer';
+import * as fromAppMetareducers from './store/app.metareducer';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import * as fromApp from './store/app.reducer';
         strictStateSerializability: true,
         strictActionSerializability: true,
       },
+      metaReducers: fromAppMetareducers.metaReducers
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
