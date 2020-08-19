@@ -6,24 +6,28 @@
           <div class="card border-0 my-3">
             <div class="card-body">
               <h5 class="card-title text-center">Sign In</h5>
-              <form class="form-signin">
+              <form #signinForm="ngForm" class="form-signin" (ngSubmit)="onSignin(signinForm)">
                 <div class="form-label-group">
                   <label for="inputEmail">Email address</label>
-                  <input type="email" id="inputEmail" class="form-control" required autofocus>
+                  <input name="email" type="email" id="inputEmail" class="form-control" ngModel required email
+                         autofocus>
                 </div>
 
                 <div class="form-label-group">
                   <label for="inputPassword">Password</label>
-                  <input type="password" id="inputPassword" class="form-control" required>
+                  <input type="password" id="inputPassword" name="password" class="form-control" ngModel required>
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="signinForm.invalid">
+                  Sign in
+                </button>
 
                 <div class="d-flex my-4 divider">
                   <span class="mx-1 text-muted">or</span>
                 </div>
 
-                <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
+                <button class="btn btn-lg btn-google btn-block text-uppercase" type="button" (click)="authorizeWithGoogle()">
                   <i class="fab fa-google mr-2"></i>
                   Sign in with Google
                 </button>
@@ -42,25 +46,27 @@
           <div class="card border-0 my-3">
             <div class="card-body">
               <h5 class="card-title text-center">Sign Up</h5>
-              <form class="form-signin">
+              <form #signupForm="ngForm" class="form-signin" (ngSubmit)="onSignup(signupForm)">
                 <div class="form-label-group">
                   <label for="firstName">First name</label>
-                  <input type="text" id="firstName" class="form-control" required autofocus>
+                  <input type="text" id="firstName" class="form-control" name="firstName" ngModel required autofocus>
                 </div>
 
                 <div class="form-label-group">
                   <label for="lastName">Last name</label>
-                  <input type="text" id="lastName" class="form-control" required>
+                  <input type="text" id="lastName" class="form-control" name="lastName" ngModel required>
                 </div>
 
                 <div class="form-label-group">
                   <label for="newEmail">Email address</label>
-                  <input type="email" id="newEmail" class="form-control" required  autocomplete="new-email">
+                  <input type="email" id="newEmail" class="form-control" name="email" ngModel email required
+                         autocomplete="new-email">
                 </div>
 
                 <div class="form-label-group">
                   <label for="newPassword">Password</label>
-                  <input type="password" id="newPassword" class="form-control" required autocomplete="new-password">
+                  <input type="password" id="newPassword" class="form-control" name="password" ngModel required
+                         autocomplete="new-password">
                 </div>
 
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign up</button>
@@ -69,13 +75,15 @@
                   <span class="mx-1 text-muted">or</span>
                 </div>
 
-                <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
+                <button class="btn btn-lg btn-google btn-block text-uppercase" type="button" (click)="authorizeWithGoogle()">
                   <i class="fab fa-google mr-2"></i>
                   Sign up with Google
                 </button>
 
                 <div class="form-group mt-2">
-                  <p class="text-center"><a routerLink="" (click)="onChangeLoginAction(loginActions.SIGNIN)">Already have an account?</a></p>
+                  <p class="text-center">
+                    <a routerLink="" (click)="onChangeLoginAction(loginActions.SIGNIN)">Already have an account?</a>
+                  </p>
                 </div>
               </form>
             </div>
