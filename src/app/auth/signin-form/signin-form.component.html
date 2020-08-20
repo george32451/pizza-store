@@ -6,6 +6,7 @@
           <div class="card border-0 my-3">
             <div class="card-body">
               <h5 class="card-title text-center">Sign In</h5>
+              <ng-container *ngTemplateOutlet="error"></ng-container>
               <form #signinForm="ngForm" class="form-signin" (ngSubmit)="onSignin(signinForm)">
                 <div class="form-label-group">
                   <label for="inputEmail">Email address</label>
@@ -20,7 +21,8 @@
 
                 <button
                   class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="signinForm.invalid">
-                  Sign in
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isAuthInProgress$ | async"></span>
+                  {{ (isAuthInProgress$ | async) ? 'Signing in...' : 'Sign in' }}
                 </button>
 
                 <div class="d-flex my-4 divider">
@@ -28,7 +30,6 @@
                 </div>
 
                 <button class="btn btn-lg btn-google btn-block text-uppercase" type="button" (click)="authorizeWithGoogle()">
-                  <i class="fab fa-google mr-2"></i>
                   Sign in with Google
                 </button>
 
@@ -46,6 +47,7 @@
           <div class="card border-0 my-3">
             <div class="card-body">
               <h5 class="card-title text-center">Sign Up</h5>
+              <ng-container *ngTemplateOutlet="error"></ng-container>
               <form #signupForm="ngForm" class="form-signin" (ngSubmit)="onSignup(signupForm)">
                 <div class="form-label-group">
                   <label for="firstName">First name</label>
@@ -69,14 +71,16 @@
                          autocomplete="new-password">
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign up</button>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="signupForm.invalid">
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isAuthInProgress$ | async"></span>
+                  {{ (isAuthInProgress$ | async) ? 'Signing up...' : 'Sign up' }}
+                </button>
 
                 <div class="d-flex my-4 divider">
                   <span class="mx-1 text-muted">or</span>
                 </div>
 
                 <button class="btn btn-lg btn-google btn-block text-uppercase" type="button" (click)="authorizeWithGoogle()">
-                  <i class="fab fa-google mr-2"></i>
                   Sign up with Google
                 </button>
 
@@ -93,3 +97,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert" *ngIf="authError$ | async">
+    {{ authError$ | async }}
+  </div>
+</ng-template>

@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faShoppingCart, faUser, faArrowLeft, faPlusCircle, faMinusCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -19,9 +20,11 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductListItemComponent } from './product-list/product-list-item/product-list-item.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { CartComponent } from './cart/cart.component';
-import { SigninFormComponent } from './signin-form/signin-form.component';
+import { SigninFormComponent } from './auth/signin-form/signin-form.component';
 import { ChangeProductQuantityComponent } from './shared/change-product-quantity/change-product-quantity.component';
 import { environment } from '../environments/environment';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { AuthEffects } from './auth/store/auth.effects';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
 
@@ -34,7 +37,8 @@ import * as fromAppMetareducers from './store/app.metareducer';
     ProductCardComponent,
     CartComponent,
     SigninFormComponent,
-    ChangeProductQuantityComponent
+    ChangeProductQuantityComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import * as fromAppMetareducers from './store/app.metareducer';
       },
       metaReducers: fromAppMetareducers.metaReducers
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
