@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pizza-store-c5796": {
+      "hosting": {
+        "pizza-store": [
+          "pizza-store-c5796"
+        ]
+      }
+    }
+  }
+}

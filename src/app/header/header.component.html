@@ -2,8 +2,8 @@
   <div class="container">
     <div class="header__content d-flex align-items-center justify-content-between">
       <span routerLink="products" class="cursor-pointer">LOGO</span>
-      <div class="d-flex">
-        <span class="mr-2 cursor-pointer" (click)="onSignin()">
+      <div class="d-flex align-items-center">
+        <span class="mr-2 cursor-pointer" (click)="onSignin()" *ngIf="!(isAuthenticated$ | async); else avatar">
           <fa-icon icon="user" size="lg"></fa-icon>
           SIGN IN
         </span>
@@ -19,3 +19,19 @@
     </div>
   </div>
 </header>
+
+<ng-template #avatar>
+  <ng-container *ngIf="(user$ | async) as user">
+    <span *ngIf="!user.photoURL"
+          class="avatar avatar-no-image d-flex align-items-center justify-content-center mr-2 cursor-pointer"
+          routerLink="/profile">
+    {{ user.displayName.charAt(0) }}
+    </span>
+    <img *ngIf="user.photoURL"
+         [src]="user.photoURL"
+         [alt]="user.displayName"
+         class="rounded-circle mr-2 cursor-pointer" width="35"
+    >
+  </ng-container>
+
+</ng-template>
