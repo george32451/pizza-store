@@ -2,11 +2,14 @@
   <img [src]="product.image" class="card-img-top" [alt]="product.title">
   <div class="card-body">
     <h5 class="card-title">{{ product.title }}</h5>
-    <p class="card-text">{{ product.desc }}</p>
-    <app-change-product-quantity
-      [product]="product"
-      [productQuantity]="productQuantity$ | async"
-      (changeQuantity)="onChangeProductQuantity($event)">
-    </app-change-product-quantity>
+    <p class="card-text text-truncate">{{ product.desc }}</p>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="product-price-amount">{{ product.price.amount | currency }}$</div>
+      <app-change-product-quantity
+        [product]="product"
+        [productQuantity]="productQuantity$ | async"
+        (changeQuantity)="onChangeProductQuantity($event)">
+      </app-change-product-quantity>
+    </div>
   </div>
 </div>

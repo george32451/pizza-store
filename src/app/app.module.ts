@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,9 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthEffects } from './auth/store/auth.effects';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ProductListEffects } from './product-list/store/product-list.effects';
+import { CheckoutFormComponent } from './cart/checkout-form/checkout-form.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import * as fromAppMetareducers from './store/app.metareducer';
     CartComponent,
     SigninFormComponent,
     ChangeProductQuantityComponent,
-    ProfileComponent
+    ProfileComponent,
+    OrderHistoryComponent,
+    CheckoutFormComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,7 @@ import * as fromAppMetareducers from './store/app.metareducer';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     StoreModule.forRoot(fromApp.appReducer, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -60,7 +67,7 @@ import * as fromAppMetareducers from './store/app.metareducer';
       metaReducers: fromAppMetareducers.metaReducers
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, ProductListEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

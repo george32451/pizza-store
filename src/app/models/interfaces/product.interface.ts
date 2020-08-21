@@ -3,5 +3,10 @@ export interface Product {
   title: string;
   desc: string;
   image: string;
-  price: number;
+  price: Price;
 }
+
+type Price = {
+  currency: string,
+  amount: string
+};
