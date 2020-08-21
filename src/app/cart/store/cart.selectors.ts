@@ -15,3 +15,8 @@ export const getTotalPrice = createSelector(
   selectCart,
   (cart) => cart.totalPrice
 );
+
+export const getCartProducts = createSelector(
+  selectCart,
+  (cart) => cart.products
+);

@@ -22,6 +22,11 @@ export const decProductQuantity = createAction(
   props<{ id: number }>()
 );
 
+export const addDeliveryCosts = createAction(
+  '[Cart] Add Delivery Costs',
+  props<{ deliveryCosts: number }>()
+);
+
 export const resetCart = createAction(
   '[Cart] Reset Cart'
 );

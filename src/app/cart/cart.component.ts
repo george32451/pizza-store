@@ -7,6 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { CartProduct } from 'models/interfaces/cart-product.interface';
 import { AddToCartFacadeService } from 'services/add-to-cart-facade.service';
 import { ChangeQuantityActionsEnum } from 'models/enums/change-quantity-actions.enum';
+import { deliveryCosts } from 'constants/delivery-costs.constants';
 import * as fromApp from 'store/app.reducer';
 import * as CartSelectors from './store/cart.selectors';
 import * as CartActions from './store/cart.actions';
@@ -19,6 +20,7 @@ import * as CartActions from './store/cart.actions';
 export class CartComponent implements OnInit {
   public cartProducts$: Observable<CartProduct[]>;
   public totalPrice$: Observable<number>;
+  public deliveryCosts = deliveryCosts;
 
   constructor(private store: Store<fromApp.AppState>, private addToCartService: AddToCartFacadeService) { }
 

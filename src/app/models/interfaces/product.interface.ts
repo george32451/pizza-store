@@ -1,3 +1,5 @@
+import { Price } from '../types/price.type';
+
 export interface Product {
   id: number;
   title: string;
@@ -5,8 +7,3 @@ export interface Product {
   image: string;
   price: Price;
 }
-
-type Price = {
-  currency: string,
-  amount: string
-};

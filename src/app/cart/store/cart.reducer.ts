@@ -69,6 +69,7 @@ const cartReducer = createReducer(
       totalPrice: priceFormatter(state.totalPrice - Number(cartProduct.price.amount))
     };
   })),
+  on(CartActions.addDeliveryCosts, ((state, { deliveryCosts }) => ({ ...state, totalPrice: state.totalPrice + deliveryCosts }))),
   on(CartActions.resetCart, (state => ({
     ...state,
     products: [],

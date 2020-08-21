@@ -26,11 +26,12 @@ import { ChangeProductQuantityComponent } from './shared/change-product-quantity
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthEffects } from './auth/store/auth.effects';
-import * as fromApp from './store/app.reducer';
-import * as fromAppMetareducers from './store/app.metareducer';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ProductListEffects } from './product-list/store/product-list.effects';
 import { CheckoutFormComponent } from './cart/checkout-form/checkout-form.component';
+import { CartEffects } from './cart/store/cart.effects';
+import * as fromApp from './store/app.reducer';
+import * as fromAppMetareducers from './store/app.metareducer';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { CheckoutFormComponent } from './cart/checkout-form/checkout-form.compon
       metaReducers: fromAppMetareducers.metaReducers
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AuthEffects, ProductListEffects])
+    EffectsModule.forRoot([AuthEffects, ProductListEffects, CartEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
