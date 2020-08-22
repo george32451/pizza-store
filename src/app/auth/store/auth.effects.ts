@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { from, Observable, of } from 'rxjs';
-import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap, take, tap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TypedAction } from '@ngrx/store/src/models';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -21,7 +21,7 @@ export class AuthEffects {
     ofType(AuthActions.signinStart),
     exhaustMap(({ email, password }) => from(this.firebaseAuth.signInWithEmailAndPassword(email, password))
       .pipe(
-        switchMap(() => this.firebaseAuth.authState),
+        switchMap(() => this.firebaseAuth.authState.pipe(take(1))),
         map(this.authSuccessRoutine),
         catchError(this.handleError)
       ))
@@ -33,7 +33,7 @@ export class AuthEffects {
     exhaustMap(({ email, password, displayName }) => from(this.firebaseAuth.createUserWithEmailAndPassword(email, password))
       .pipe(
         switchMap(firebaseUser => firebaseUser.user.updateProfile({ displayName })),
-        switchMap(() => this.firebaseAuth.authState),
+        switchMap(() => this.firebaseAuth.authState.pipe(take(1))),
         map(this.authSuccessRoutine),
         catchError(this.handleError)
       ))
@@ -44,7 +44,7 @@ export class AuthEffects {
     ofType(AuthActions.socialAuthStart),
     exhaustMap(({ provider }) => from(this.firebaseAuth.signInWithPopup(this.chooseSocialAuthProvider(provider)))
       .pipe(
-        switchMap(() => this.firebaseAuth.authState),
+        switchMap(() => this.firebaseAuth.authState.pipe(take(1))),
         map(this.authSuccessRoutine),
         catchError(this.handleError)
       ))

@@ -26,12 +26,12 @@ import { ChangeProductQuantityComponent } from './shared/change-product-quantity
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthEffects } from './auth/store/auth.effects';
-import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderHistoryComponent } from './auth/order-history/order-history.component';
 import { ProductListEffects } from './product-list/store/product-list.effects';
 import { CheckoutFormComponent } from './cart/checkout-form/checkout-form.component';
 import { CartEffects } from './cart/store/cart.effects';
 import { FirebaseTimePipe } from './shared/pipes/firebase-time.pipe';
-import { OrderHistoryDetailsComponent } from './order-history/order-history-details/order-history-details.component';
+import { OrderHistoryDetailsComponent } from './auth/order-history/order-history-details/order-history-details.component';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
 
