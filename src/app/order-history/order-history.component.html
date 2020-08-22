@@ -2,8 +2,10 @@
 <div class="card mb-3">
   <div class="card-body">
     <ng-container *ngFor="let order of orders; trackBy: trackById; let last=last">
-      <div class="row align-items-center" >
-        <div class="col-lg-5 col-md-12 col-sm-12"><h6 class="mb-0">Order № {{ order.id }}</h6></div>
+      <div class="row align-items-center">
+        <div class="col-lg-5 col-md-12 col-sm-12">
+          <span class="mb-0 btn-link cursor-pointer" (click)="onOpenOrderModal(order)">Order № {{ order.id }}</span>
+        </div>
         <span class="col-lg-5 col-md-12 col-sm-12 date-time">{{ order.timestamp | firebaseTime | date:'medium' }}</span>
         <span class="col-lg-2 col-md-12 col-sm-12 text-secondary">{{ order.totalPrice.amount | currency:order.totalPrice.currency }}</span>
       </div>

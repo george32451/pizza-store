@@ -6,6 +6,7 @@ import { firestore } from 'firebase/app';
 import { Price } from 'models/types/price.type';
 import { CartProduct } from 'models/interfaces/cart-product.interface';
 import { Order } from 'models/interfaces/order.interface';
+import { User } from 'models/interfaces/user.interface';
 
 @Component({
   selector: 'app-checkout-form',
@@ -15,6 +16,7 @@ import { Order } from 'models/interfaces/order.interface';
 export class CheckoutFormComponent {
   @Input() public readonly cartProducts: CartProduct[];
   @Input() public readonly totalPrice: Price;
+  @Input() public readonly user: User;
   @Output() public readonly placeOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
   onPlaceOrder(checkoutForm: NgForm): void {

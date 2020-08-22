@@ -38,6 +38,7 @@
         <app-checkout-form
           [cartProducts]="cartProducts$ | async"
           [totalPrice]="{ amount: (totalPrice$ | async).toString(), currency: 'USD' }"
+          [user]="user$ | async"
           (placeOrder)="onPlaceOrder($event)">
 
         </app-checkout-form>

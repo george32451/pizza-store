@@ -2,11 +2,11 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="fullName">Full Name *</label>
-      <input type="text" class="form-control" id="fullName" name="fullName" ngModel required>
+      <input type="text" class="form-control" id="fullName" name="fullName" [ngModel]="user?.displayName" required>
     </div>
     <div class="form-group col-md-6">
       <label for="email">Email *</label>
-      <input type="email" class="form-control" id="email" name="email" ngModel email required>
+      <input type="email" class="form-control" id="email" name="email" [ngModel]="user?.email" email required>
     </div>
   </div>
   <div class="form-group">

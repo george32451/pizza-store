@@ -9,6 +9,7 @@ import { CartProduct } from 'models/interfaces/cart-product.interface';
 import { AddToCartFacadeService } from 'services/add-to-cart-facade.service';
 import { ChangeQuantityActionsEnum } from 'models/enums/change-quantity-actions.enum';
 import { Order } from 'models/interfaces/order.interface';
+import { User } from 'models/interfaces/user.interface';
 import { deliveryCosts } from 'constants/delivery-costs.constants';
 import * as fromApp from 'store/app.reducer';
 import * as CartSelectors from './store/cart.selectors';
@@ -23,6 +24,7 @@ import * as CartActions from './store/cart.actions';
 export class CartComponent implements OnInit {
   public cartProducts$: Observable<CartProduct[]>;
   public totalPrice$: Observable<number>;
+  public user$: Observable<User>;
   public deliveryCosts = deliveryCosts;
 
   private ordersDB: AngularFireList<Order>;
@@ -38,12 +40,12 @@ export class CartComponent implements OnInit {
 
     this.totalPrice$ = this.store.pipe(select(CartSelectors.getTotalPrice));
 
-    this.store.pipe(
+    this.user$ = this.store.pipe(
       select(AuthSelectors.getUser),
       tap(user => {
         this.ordersDB = this.fireDatabase.list<Order>(`/orders/${user?.uid ?? ''}`);
       })
-    ).subscribe();
+    );
   }
 
   public onChangeProductQuantity(event: ChangeQuantityActionsEnum, product: CartProduct): void {
