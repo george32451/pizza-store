@@ -31,13 +31,13 @@
           <div class="text-container__title text-uppercase">Delivery costs:</div>
           <span class="total__price px-3">{{ deliveryCosts | currency:'USD' }}</span>
         </div>
-        <div class="total d-flex justify-content-between w-100 py-5">
+        <div class="total d-flex justify-content-between w-100 py-5" *ngIf="(totalPrice$ | async) as totalPrice">
           <h2>Total price:</h2>
-          <span class="total__price px-3">{{ totalPrice$ | async | currency:'USD' }}</span>
+          <span class="total__price px-3">{{ totalPrice.currencyBasedAmount | currency:totalPrice.currency }}</span>
         </div>
         <app-checkout-form
           [cartProducts]="cartProducts$ | async"
-          [totalPrice]="{ amount: (totalPrice$ | async).toString(), currency: 'USD' }"
+          [totalPrice]="totalPrice$ | async"
           [user]="user$ | async"
           (placeOrder)="onPlaceOrder($event)">
 

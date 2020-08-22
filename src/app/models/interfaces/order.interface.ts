@@ -2,7 +2,7 @@ import { firestore } from 'firebase/app';
 
 import { User } from './user.interface';
 import { CartProduct } from './cart-product.interface';
-import { Price } from '../types/price.type';
+import { TotalPrice } from '../types/price.type';
 
 export interface Order {
   id: number;
@@ -11,5 +11,5 @@ export interface Order {
   address2: string;
   client: Pick<User, 'email' | 'displayName'>;
   products?: CartProduct[];
-  totalPrice: Price;
+  totalPrice: TotalPrice;
 }

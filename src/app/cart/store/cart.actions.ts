@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Product } from '../../models/interfaces/product.interface';
+import { Product } from 'models/interfaces/product.interface';
+import { CurrencyEnum } from 'models/enums/currency.enum';
 
 export const addProductToCart = createAction(
   '[Cart] Add Product',
@@ -29,4 +30,14 @@ export const addDeliveryCosts = createAction(
 
 export const resetCart = createAction(
   '[Cart] Reset Cart'
+);
+
+export const convertTotalPriceStart = createAction(
+  '[Cart] Convert Total Price Start',
+  props<{ currency: CurrencyEnum }>()
+);
+
+export const convertTotalPriceSuccess = createAction(
+  '[Cart] Convert Total Price Success',
+  props<{ currentCurrency: CurrencyEnum, multiplier: number }>()
 );
