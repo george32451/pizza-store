@@ -3,7 +3,7 @@
     <div class="header__content d-flex align-items-center justify-content-between">
       <span routerLink="products" class="cursor-pointer">LOGO</span>
       <div class="d-flex align-items-center">
-        <span class="cursor-pointer" (click)="onSignin()" *ngIf="!(isAuthenticated$ | async); else avatar">
+        <span class="cursor-pointer mr-2" (click)="onSignin()" *ngIf="!(isAuthenticated$ | async); else avatar">
           <fa-icon icon="user" size="lg"></fa-icon>
           SIGN IN
         </span>
