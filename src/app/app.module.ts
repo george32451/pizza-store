@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,12 @@ import { ChangeProductQuantityComponent } from './shared/change-product-quantity
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AuthEffects } from './auth/store/auth.effects';
+import { OrderHistoryComponent } from './auth/order-history/order-history.component';
+import { ProductListEffects } from './product-list/store/product-list.effects';
+import { CheckoutFormComponent } from './cart/checkout-form/checkout-form.component';
+import { CartEffects } from './cart/store/cart.effects';
+import { FirebaseTimePipe } from './shared/pipes/firebase-time.pipe';
+import { OrderHistoryDetailsComponent } from './auth/order-history/order-history-details/order-history-details.component';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
 
@@ -38,7 +45,11 @@ import * as fromAppMetareducers from './store/app.metareducer';
     CartComponent,
     SigninFormComponent,
     ChangeProductQuantityComponent,
-    ProfileComponent
+    ProfileComponent,
+    OrderHistoryComponent,
+    CheckoutFormComponent,
+    FirebaseTimePipe,
+    OrderHistoryDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +61,7 @@ import * as fromAppMetareducers from './store/app.metareducer';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     StoreModule.forRoot(fromApp.appReducer, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -60,7 +72,7 @@ import * as fromAppMetareducers from './store/app.metareducer';
       metaReducers: fromAppMetareducers.metaReducers
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, ProductListEffects, CartEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

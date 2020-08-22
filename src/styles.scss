@@ -9,7 +9,7 @@ body {
   padding-top: 100px;
 }
 
-button:focus, a:focus, span:focus
+button:focus, a:focus, span:focus, img:focus
 {
   outline: none;
   box-shadow: none !important;
@@ -17,6 +17,10 @@ button:focus, a:focus, span:focus
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.product-price-amount {
+  font-size: 27px;
 }
 
 .btn-circle {

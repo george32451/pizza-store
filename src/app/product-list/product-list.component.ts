@@ -6,6 +6,7 @@ import { select, Store } from '@ngrx/store';
 
 import { Product } from 'models/interfaces/product.interface';
 import * as fromApp from 'store/app.reducer';
+import * as ProductListActions from './store/product-list.actions';
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +19,7 @@ export class ProductListComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(ProductListActions.getProductListStart());
     this.products$ = this.store.pipe(
       select('productList'),
       map(productList => productList.products)

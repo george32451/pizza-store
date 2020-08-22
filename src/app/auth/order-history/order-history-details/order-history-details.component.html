@@ -1,0 +1,43 @@
+<div class="container p-4">
+  <h5 class="text-center">Order № {{ order.id }}</h5>
+  <div class="card">
+    <div class="card-body">
+      <ng-container *ngTemplateOutlet="orderRow; context: { title: 'Address', content: order.address + ', ' + order.address2 }"></ng-container>
+      <ng-container *ngTemplateOutlet="orderRow; context: { title: 'Time of order', content: order.timestamp | firebaseTime | date:'medium' }"></ng-container>
+      <ng-container *ngTemplateOutlet="orderRow; context: { title: 'Recipient', content: order.client.displayName + ', ' + order.client.email }"></ng-container>
+    </div>
+    <div class="card-footer d-flex" *ngFor="let product of order.products">
+      <div class="img-container mr-2 d-flex align-items-center">
+        <img [src]="product.image" [alt]="product.title" width="60">
+      </div>
+      <div class="prime-container d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <div class="d-flex flex-column">
+            <span>{{ product.title }}</span>
+            <small>{{ product.quantity }} pcs</small>
+          </div>
+          <span>{{ +product.price.amount * product.quantity | currency:'USD' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer d-flex">
+      <div class="prime-container d-flex justify-content-between align-items-center">
+        <span>DELIVERY COSTS</span>
+        <span>{{ deliveryCosts | currency:'USD' }}</span>
+      </div>
+    </div>
+    <div class="card-footer d-flex">
+      <div class="prime-container d-flex justify-content-between align-items-center">
+        <span>TOTAL PRICE</span>
+        <span>{{ order.totalPrice.amount | currency:order.totalPrice.currency }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #orderRow let-title="title" let-content="content">
+  <div class="row my-3">
+    <h6 class="col-lg-6 col-md-12 col-sm-12 mb-0">{{ title }}</h6>
+    <span class="col-lg-6 col-md-12 col-sm-12 text-secondary">{{ content }}</span>
+  </div>
+</ng-template>

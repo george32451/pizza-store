@@ -24,7 +24,7 @@ const cartReducer = createReducer(
       ...state,
       products: [...state.products, newCartProduct],
       totalCount: state.totalCount + 1,
-      totalPrice: state.totalPrice + product.price
+      totalPrice: priceFormatter(state.totalPrice + Number(product.price.amount))
     };
   }),
   on(CartActions.removeProductFromCart, (state, { id }) => {
@@ -35,7 +35,7 @@ const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalCount: state.totalCount - productToDelete.quantity,
-      totalPrice: state.totalPrice - productToDelete.price * productToDelete.quantity
+      totalPrice: priceFormatter(state.totalPrice - Number(productToDelete.price.amount) * productToDelete.quantity)
     };
   }),
   on(CartActions.incProductQuantity, ((state, { id }) => {
@@ -48,7 +48,7 @@ const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalCount: state.totalCount + 1,
-      totalPrice: state.totalPrice + updatedCartProduct.price
+      totalPrice: priceFormatter(state.totalPrice + Number(updatedCartProduct.price.amount))
     };
   })),
   on(CartActions.decProductQuantity, ((state, { id }) => {
@@ -66,9 +66,10 @@ const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalCount: state.totalCount - 1,
-      totalPrice: state.totalPrice - cartProduct.price
+      totalPrice: priceFormatter(state.totalPrice - Number(cartProduct.price.amount))
     };
   })),
+  on(CartActions.addDeliveryCosts, ((state, { deliveryCosts }) => ({ ...state, totalPrice: state.totalPrice + deliveryCosts }))),
   on(CartActions.resetCart, (state => ({
     ...state,
     products: [],
@@ -79,4 +80,8 @@ const cartReducer = createReducer(
 
 export function reducer(state: State | undefined, action: Action): State {
   return cartReducer(state, action);
+}
+
+function priceFormatter(price: number): number {
+  return Number(price.toFixed(2));
 }
