@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+      <ng-container [ngSwitch]="currentLoginAction">
+        <ng-container *ngSwitchCase="loginActions.SIGNIN">
+          <div class="card border-0 my-3">
+            <div class="card-body">
+              <h5 class="card-title text-center">Sign In</h5>
+              <ng-container *ngTemplateOutlet="error"></ng-container>
+              <form #signinForm="ngForm" class="form-signin" (ngSubmit)="onSignin(signinForm)">
+                <div class="form-label-group">
+                  <label for="inputEmail">Email address</label>
+                  <input name="email" type="email" id="inputEmail" class="form-control" ngModel required email
+                         autofocus>
+                </div>
+
+                <div class="form-label-group">
+                  <label for="inputPassword">Password</label>
+                  <input type="password" id="inputPassword" name="password" class="form-control" ngModel required>
+                </div>
+
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="signinForm.invalid">
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isAuthInProgress$ | async"></span>
+                  {{ (isAuthInProgress$ | async) ? 'Signing in...' : 'Sign in' }}
+                </button>
+
+                <div class="d-flex my-4 divider">
+                  <span class="mx-1 text-muted">or</span>
+                </div>
+
+                <button class="btn btn-lg btn-google btn-block text-uppercase" type="button" (click)="authorizeWithGoogle()">
+                  Sign in with Google
+                </button>
+
+                <div class="form-group mt-2">
+                  <p class="text-center">
+                    Don't have account?
+                    <a routerLink="" (click)="onChangeLoginAction(loginActions.SIGNUP)">Sign up here</a>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="loginActions.SIGNUP">
+          <div class="card border-0 my-3">
+            <div class="card-body">
+              <h5 class="card-title text-center">Sign Up</h5>
+              <ng-container *ngTemplateOutlet="error"></ng-container>
+              <form #signupForm="ngForm" class="form-signin" (ngSubmit)="onSignup(signupForm)">
+                <div class="form-label-group">
+                  <label for="firstName">First name</label>
+                  <input type="text" id="firstName" class="form-control" name="firstName" ngModel required autofocus>
+                </div>
+
+                <div class="form-label-group">
+                  <label for="lastName">Last name</label>
+                  <input type="text" id="lastName" class="form-control" name="lastName" ngModel required>
+                </div>
+
+                <div class="form-label-group">
+                  <label for="newEmail">Email address</label>
+                  <input type="email" id="newEmail" class="form-control" name="email" ngModel email required
+                         autocomplete="new-email">
+                </div>
+
+                <div class="form-label-group">
+                  <label for="newPassword">Password</label>
+                  <input type="password" id="newPassword" class="form-control" name="password" ngModel required
+                         autocomplete="new-password">
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="signupForm.invalid">
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isAuthInProgress$ | async"></span>
+                  {{ (isAuthInProgress$ | async) ? 'Signing up...' : 'Sign up' }}
+                </button>
+
+                <div class="d-flex my-4 divider">
+                  <span class="mx-1 text-muted">or</span>
+                </div>
+
+                <button class="btn btn-lg btn-google btn-block text-uppercase" type="button" (click)="authorizeWithGoogle()">
+                  Sign up with Google
+                </button>
+
+                <div class="form-group mt-2">
+                  <p class="text-center">
+                    <a routerLink="" (click)="onChangeLoginAction(loginActions.SIGNIN)">Already have an account?</a>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert" *ngIf="authError$ | async">
+    {{ authError$ | async }}
+  </div>
+</ng-template>

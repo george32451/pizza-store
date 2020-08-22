@@ -1,0 +1,40 @@
+.card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  height: 50px;
+  border-radius: 1rem;
+}
+
+.btn-google {
+  color: white;
+  background-color: #ea4335;
+}
+
+.divider:before, .divider:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid #6c757d;
+  margin: auto;
+}

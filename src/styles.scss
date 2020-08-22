@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.content-wrapper {
+  padding-top: 100px;
+}
+
+button:focus, a:focus, span:focus, img:focus
+{
+  outline: none;
+  box-shadow: none !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.product-price-amount {
+  font-size: 27px;
+}
+
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.avatar-no-image {
+  background-color: $primary;
+  color: white;
+}
+
+.avatar-no-image-lg {
+  width: 150px;
+  height: 150px;
+  font-size: 40px;
+}

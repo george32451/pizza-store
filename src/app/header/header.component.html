@@ -1,0 +1,42 @@
+<header class="header d-flex">
+  <div class="container">
+    <div class="header__content d-flex align-items-center justify-content-between">
+      <span routerLink="products" class="cursor-pointer">LOGO</span>
+      <div class="d-flex align-items-center">
+        <span class="cursor-pointer" (click)="onSignin()" *ngIf="!(isAuthenticated$ | async); else avatar">
+          <fa-icon icon="user" size="lg"></fa-icon>
+          SIGN IN
+        </span>
+        <span  class="cursor-pointer mx-2" *ngIf="(totalPrice$ | async) as totalPrice"
+               (click)="convert(totalPrice.currency === currencies.USD ? currencies.EUR : currencies.USD)">
+          {{ totalPrice.currencyBasedAmount | currency:totalPrice.currency }}
+        </span>
+        <span routerLink="cart" class="cursor-pointer">
+          <fa-icon icon="shopping-cart" size="lg"></fa-icon>
+          <ng-container *ngIf="(productsCounter$ | async) as productsCounter">
+            <sup *ngIf="productsCounter > 0">
+              <span class="badge badge-danger">{{ productsCounter }}</span>
+            </sup>
+          </ng-container>
+        </span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<ng-template #avatar>
+  <ng-container *ngIf="(user$ | async) as user">
+    <span *ngIf="!user.photoURL"
+          class="avatar avatar-no-image d-flex align-items-center justify-content-center mr-2 cursor-pointer"
+          routerLink="/profile">
+    {{ user.displayName.charAt(0) }}
+    </span>
+    <img *ngIf="user.photoURL"
+         [src]="user.photoURL"
+         [alt]="user.displayName"
+         class="rounded-circle mr-2 cursor-pointer" width="35"
+         routerLink="/profile"
+    >
+  </ng-container>
+
+</ng-template>

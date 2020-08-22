@@ -23,6 +23,20 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "ngrx-store-localstorage",
+              "firebase",
+              "firebase/app",
+              "@firebase/app",
+              "@firebase/firestore",
+              "@firebase/auth",
+              "@firebase/component",
+              "@firebase/functions",
+              "@firebase/database",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/util"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -121,8 +135,13 @@
               "devServerTarget": "pizza-store:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "pizza-store"
 }

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <button class="btn btn-outline-primary mb-3" routerLink="/products">
+        <fa-icon icon="arrow-left" class="mr-1"></fa-icon>
+        Go Back
+      </button>
+      <div class="card" *ngIf="(product$ | async) as product">
+        <img [src]="product.image" class="card-img-top" [alt]="product.title">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text">{{ product.desc }}</p>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="product-price-amount">{{ product.price.amount | currency }}$</div>
+            <app-change-product-quantity
+              [product]="product"
+              [productQuantity]="productQuantity$ | async"
+              (changeQuantity)="onChangeProductQuantity($event, product)">
+            </app-change-product-quantity>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
