@@ -7,18 +7,24 @@
           <fa-icon icon="user" size="lg"></fa-icon>
           SIGN IN
         </span>
-        <span  class="cursor-pointer mx-2" *ngIf="(totalPrice$ | async) as totalPrice"
-               (click)="convert(totalPrice.currency === currencies.USD ? currencies.EUR : currencies.USD)">
-          {{ totalPrice.currencyBasedAmount | currency:totalPrice.currency }}
-        </span>
-        <span routerLink="cart" class="cursor-pointer">
-          <fa-icon icon="shopping-cart" size="lg"></fa-icon>
-          <ng-container *ngIf="(productsCounter$ | async) as productsCounter">
-            <sup *ngIf="productsCounter > 0">
-              <span class="badge badge-danger">{{ productsCounter }}</span>
-            </sup>
-          </ng-container>
-        </span>
+        <ng-container *ngIf="(totalPrice$ | async) as totalPrice">
+          <button class="btn btn-outline-primary" (click)="convert(totalPrice.currency === currencies.USD ? currencies.EUR : currencies.USD)">
+            <span class="convert-to">Convert to</span> {{ totalPrice.currency === currencies.USD ? '€EUR' : '$USD' }}
+          </button>
+          <span routerLink="cart" class="cursor-pointer">
+            <span class="mx-1">
+              {{ totalPrice.currencyBasedAmount | currency:totalPrice.currency }}
+            </span>
+            <span>
+              <fa-icon icon="shopping-cart" size="lg"></fa-icon>
+              <ng-container *ngIf="(productsCounter$ | async) as productsCounter">
+                <sup *ngIf="productsCounter > 0">
+                  <span class="badge badge-danger">{{ productsCounter }}</span>
+                </sup>
+              </ng-container>
+            </span>
+          </span>
+        </ng-container>
       </div>
     </div>
   </div>

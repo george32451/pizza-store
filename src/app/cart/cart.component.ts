@@ -13,7 +13,7 @@ import { ChangeQuantityActionsEnum } from 'models/enums/change-quantity-actions.
 import { Order } from 'models/interfaces/order.interface';
 import { User } from 'models/interfaces/user.interface';
 import { TotalPrice } from 'models/types/price.type';
-import { ThankYouModalComponent } from 'shared/thank-you-modal/thank-you-modal.component';
+import { ThankYouModalComponent } from 'shared/modals/thank-you-modal/thank-you-modal.component';
 import { deliveryCosts } from 'constants/delivery-costs.constants';
 import * as fromApp from 'store/app.reducer';
 import * as CartSelectors from './store/cart.selectors';

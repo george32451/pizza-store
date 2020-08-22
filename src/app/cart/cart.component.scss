@@ -10,6 +10,10 @@
   margin-left: 40px;
 }
 
+.text-container {
+  align-items: center;
+}
+
 .text-container__title {
   font-size: 22px;
 }
@@ -39,5 +43,26 @@
 @include media-breakpoint-down(md) {
   .cart-empty-title {
     font-size: 36px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .product-count, .product-price-amount {
+    font-size: 16px;
+  }
+
+  .text-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .text-container__title {
+    font-size: 14px;
+  }
+
+  .btn-circle {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
   }
 }

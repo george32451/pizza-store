@@ -6,7 +6,7 @@ body {
 }
 
 .content-wrapper {
-  padding-top: 100px;
+  padding: 100px 0 50px 0;
 }
 
 button:focus, a:focus, span:focus, img:focus
@@ -48,4 +48,12 @@ button:focus, a:focus, span:focus, img:focus
   width: 150px;
   height: 150px;
   font-size: 40px;
+}
+
+@include media-breakpoint-down(sm) {
+  .btn-circle {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+  }
 }

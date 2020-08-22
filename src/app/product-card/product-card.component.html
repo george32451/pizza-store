@@ -11,7 +11,7 @@
           <h5 class="card-title">{{ product.title }}</h5>
           <p class="card-text">{{ product.desc }}</p>
           <div class="d-flex align-items-center justify-content-between">
-            <div class="product-price-amount">{{ product.price.amount | currency }}$</div>
+            <div class="product-price-amount">{{ product.price.amount | currency }}</div>
             <app-change-product-quantity
               [product]="product"
               [productQuantity]="productQuantity$ | async"

@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SocialAuthProvidersEnum } from 'models/enums/social-auth-providers.enum';
+import { BaseModalComponent } from 'shared/modals/base-modal/base-modal.component';
 import * as fromApp from 'store/app.reducer';
 import * as AuthActions from 'auth/store/auth.actions';
 import * as AuthSelectors from 'auth/store/auth.selectors';
@@ -21,15 +22,15 @@ enum LoginActions {
   templateUrl: './signin-form.component.html',
   styleUrls: ['./signin-form.component.scss']
 })
-export class SigninFormComponent implements OnDestroy, OnInit {
+export class SigninFormComponent extends BaseModalComponent implements OnDestroy, OnInit {
   public loginActions: typeof LoginActions = LoginActions;
   public currentLoginAction: LoginActions = LoginActions.SIGNIN;
   public authError$: Observable<string>;
   public isAuthInProgress$: Observable<boolean>;
 
-  private destroy$: Subject<void> = new Subject<void>();
-
-  constructor(private store: Store<fromApp.AppState>, private activeModal: NgbActiveModal) { }
+  constructor(private store: Store<fromApp.AppState>, protected activeModal: NgbActiveModal) {
+    super(activeModal);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(AuthActions.clearAuthError());
@@ -49,6 +50,7 @@ export class SigninFormComponent implements OnDestroy, OnInit {
 
   public onChangeLoginAction(action: LoginActions): void {
     this.currentLoginAction = action;
+    this.store.dispatch(AuthActions.clearAuthError());
   }
 
   onSignin(form: NgForm): void {
@@ -72,7 +74,6 @@ export class SigninFormComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    super.ngOnDestroy();
   }
 }
