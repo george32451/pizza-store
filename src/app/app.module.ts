@@ -32,7 +32,8 @@ import { CheckoutFormComponent } from './cart/checkout-form/checkout-form.compon
 import { CartEffects } from './cart/store/cart.effects';
 import { FirebaseTimePipe } from './shared/pipes/firebase-time.pipe';
 import { OrderHistoryDetailsComponent } from './auth/order-history/order-history-details/order-history-details.component';
-import { ThankYouModalComponent } from './shared/thank-you-modal/thank-you-modal.component';
+import { ThankYouModalComponent } from './shared/modals/thank-you-modal/thank-you-modal.component';
+import { BaseModalComponent } from './shared/modals/base-modal/base-modal.component';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
 
@@ -51,7 +52,8 @@ import * as fromAppMetareducers from './store/app.metareducer';
     CheckoutFormComponent,
     FirebaseTimePipe,
     OrderHistoryDetailsComponent,
-    ThankYouModalComponent
+    ThankYouModalComponent,
+    BaseModalComponent
   ],
   imports: [
     BrowserModule,
