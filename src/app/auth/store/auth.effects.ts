@@ -6,7 +6,7 @@ import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TypedAction } from '@ngrx/store/src/models';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase';
+import { auth } from 'firebase/app';
 
 import * as AuthActions from './auth.actions';
 import { User } from 'models/interfaces/user.interface';

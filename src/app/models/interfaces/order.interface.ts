@@ -1,4 +1,4 @@
-import { firestore } from 'firebase';
+import { firestore } from 'firebase/app';
 
 import { User } from './user.interface';
 import { CartProduct } from './cart-product.interface';

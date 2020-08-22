@@ -35,7 +35,12 @@
           <h2>Total price:</h2>
           <span class="total__price px-3">{{ totalPrice$ | async | currency:'USD' }}</span>
         </div>
-        <app-checkout-form [cartProducts]="cartProducts$ | async" [totalPrice]="{ amount: (totalPrice$ | async).toString(), currency: 'USD' }"></app-checkout-form>
+        <app-checkout-form
+          [cartProducts]="cartProducts$ | async"
+          [totalPrice]="{ amount: (totalPrice$ | async).toString(), currency: 'USD' }"
+          (placeOrder)="onPlaceOrder($event)">
+
+        </app-checkout-form>
       </ng-container>
     </div>
   </div>

@@ -30,6 +30,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ProductListEffects } from './product-list/store/product-list.effects';
 import { CheckoutFormComponent } from './cart/checkout-form/checkout-form.component';
 import { CartEffects } from './cart/store/cart.effects';
+import { FirebaseTimePipe } from './shared/pipes/firebase-time.pipe';
+import { OrderHitoryItemComponent } from './order-history/order-hitory-item/order-hitory-item.component';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
 
@@ -45,7 +47,9 @@ import * as fromAppMetareducers from './store/app.metareducer';
     ChangeProductQuantityComponent,
     ProfileComponent,
     OrderHistoryComponent,
-    CheckoutFormComponent
+    CheckoutFormComponent,
+    FirebaseTimePipe,
+    OrderHitoryItemComponent
   ],
   imports: [
     BrowserModule,

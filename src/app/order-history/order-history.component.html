@@ -1,14 +1,13 @@
 <h3>Order History</h3>
 <div class="card mb-3">
   <div class="card-body">
-    <div class="row align-items-center">
-      <div class="col-sm-3"><h6 class="mb-0">Order</h6></div>
-      <div class="col-sm-9 text-secondary">Test order</div>
-    </div>
-    <hr>
-    <div class="row align-items-center">
-      <div class="col-sm-3"><h6 class="mb-0">Another order</h6></div>
-      <div class="col-sm-9 text-secondary">Another test order</div>
-    </div>
+    <ng-container *ngFor="let order of orders; trackBy: trackById; let last=last">
+      <div class="row align-items-center" >
+        <div class="col-lg-5 col-md-12 col-sm-12"><h6 class="mb-0">Order № {{ order.id }}</h6></div>
+        <span class="col-lg-5 col-md-12 col-sm-12 date-time">{{ order.timestamp | firebaseTime | date:'medium' }}</span>
+        <span class="col-lg-2 col-md-12 col-sm-12 text-secondary">{{ order.totalPrice.amount | currency:order.totalPrice.currency }}</span>
+      </div>
+      <hr *ngIf="!last">
+    </ng-container>
   </div>
 </div>
