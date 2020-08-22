@@ -12,6 +12,7 @@ import { AddToCartFacadeService } from 'services/add-to-cart-facade.service';
 import { ChangeQuantityActionsEnum } from 'models/enums/change-quantity-actions.enum';
 import { Order } from 'models/interfaces/order.interface';
 import { User } from 'models/interfaces/user.interface';
+import { TotalPrice } from 'models/types/price.type';
 import { ThankYouModalComponent } from 'shared/thank-you-modal/thank-you-modal.component';
 import { deliveryCosts } from 'constants/delivery-costs.constants';
 import * as fromApp from 'store/app.reducer';
@@ -26,7 +27,7 @@ import * as CartActions from './store/cart.actions';
 })
 export class CartComponent implements OnInit {
   public cartProducts$: Observable<CartProduct[]>;
-  public totalPrice$: Observable<number>;
+  public totalPrice$: Observable<TotalPrice>;
   public user$: Observable<User>;
   public deliveryCosts = deliveryCosts;
 

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { firestore } from 'firebase/app';
 
-import { Price } from 'models/types/price.type';
+import { TotalPrice } from 'models/types/price.type';
 import { CartProduct } from 'models/interfaces/cart-product.interface';
 import { Order } from 'models/interfaces/order.interface';
 import { User } from 'models/interfaces/user.interface';
@@ -15,7 +15,7 @@ import { User } from 'models/interfaces/user.interface';
 })
 export class CheckoutFormComponent {
   @Input() public readonly cartProducts: CartProduct[];
-  @Input() public readonly totalPrice: Price;
+  @Input() public readonly totalPrice: TotalPrice;
   @Input() public readonly user: User;
   @Output() public readonly placeOrder: EventEmitter<Order> = new EventEmitter<Order>();
 

@@ -21,6 +21,7 @@ export class AuthEffects {
     ofType(AuthActions.signinStart),
     exhaustMap(({ email, password }) => from(this.firebaseAuth.signInWithEmailAndPassword(email, password))
       .pipe(
+        switchMap(() => from(this.firebaseAuth.setPersistence(auth.Auth.Persistence.LOCAL))),
         switchMap(() => this.firebaseAuth.authState.pipe(take(1))),
         map(this.authSuccessRoutine),
         catchError(this.handleError)
@@ -33,6 +34,7 @@ export class AuthEffects {
     exhaustMap(({ email, password, displayName }) => from(this.firebaseAuth.createUserWithEmailAndPassword(email, password))
       .pipe(
         switchMap(firebaseUser => firebaseUser.user.updateProfile({ displayName })),
+        switchMap(() => from(this.firebaseAuth.setPersistence(auth.Auth.Persistence.LOCAL))),
         switchMap(() => this.firebaseAuth.authState.pipe(take(1))),
         map(this.authSuccessRoutine),
         catchError(this.handleError)
@@ -44,6 +46,7 @@ export class AuthEffects {
     ofType(AuthActions.socialAuthStart),
     exhaustMap(({ provider }) => from(this.firebaseAuth.signInWithPopup(this.chooseSocialAuthProvider(provider)))
       .pipe(
+        switchMap(() => from(this.firebaseAuth.setPersistence(auth.Auth.Persistence.LOCAL))),
         switchMap(() => this.firebaseAuth.authState.pipe(take(1))),
         map(this.authSuccessRoutine),
         catchError(this.handleError)

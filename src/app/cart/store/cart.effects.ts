@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { filter, map, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Product } from 'models/interfaces/product.interface';
+import { CurrencyEnum } from 'models/enums/currency.enum';
 import { deliveryCosts } from 'constants/delivery-costs.constants';
 import * as CartActions from './cart.actions';
 import * as CartSelectors from './cart.selectors';
@@ -28,7 +30,18 @@ export class CartEffects {
     )
   );
 
-  constructor(private actions$: Actions, private store: Store) {}
+  convertTotalPrice$ = createEffect(() => this.actions$.pipe(
+    ofType(CartActions.convertTotalPriceStart),
+    switchMap(({ currency }) => this.http.get<{ base: CurrencyEnum, rates: { [key in CurrencyEnum]: number } }>(
+      `https://api.exchangeratesapi.io/latest?base=USD&symbols=${currency}`
+    ).pipe(
+      map((currencyRates) => {
+        return CartActions.convertTotalPriceSuccess({ currentCurrency: currency, multiplier: currencyRates.rates[currency] });
+      })
+    )),
+  ));
+
+  constructor(private actions$: Actions, private store: Store, private http: HttpClient) {}
 
   private isFirstProductAddedFromCart(products: Product[]): boolean {
     return products.length === 1;

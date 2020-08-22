@@ -7,7 +7,7 @@
           <span class="mb-0 btn-link cursor-pointer" (click)="onOpenOrderModal(order)">Order № {{ order.id }}</span>
         </div>
         <span class="col-lg-5 col-md-12 col-sm-12 date-time">{{ order.timestamp | firebaseTime | date:'medium' }}</span>
-        <span class="col-lg-2 col-md-12 col-sm-12 text-secondary">{{ order.totalPrice.amount | currency:order.totalPrice.currency }}</span>
+        <span class="col-lg-2 col-md-12 col-sm-12 text-secondary">{{ order.totalPrice.currencyBasedAmount | currency:order.totalPrice.currency }}</span>
       </div>
       <hr *ngIf="!last">
     </ng-container>

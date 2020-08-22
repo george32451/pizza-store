@@ -29,7 +29,7 @@
     <div class="card-footer d-flex">
       <div class="prime-container d-flex justify-content-between align-items-center">
         <span>TOTAL PRICE</span>
-        <span>{{ order.totalPrice.amount | currency:order.totalPrice.currency }}</span>
+        <span>{{ order.totalPrice.currencyBasedAmount | currency:order.totalPrice.currency }}</span>
       </div>
     </div>
   </div>

@@ -3,9 +3,13 @@
     <div class="header__content d-flex align-items-center justify-content-between">
       <span routerLink="products" class="cursor-pointer">LOGO</span>
       <div class="d-flex align-items-center">
-        <span class="mr-2 cursor-pointer" (click)="onSignin()" *ngIf="!(isAuthenticated$ | async); else avatar">
+        <span class="cursor-pointer" (click)="onSignin()" *ngIf="!(isAuthenticated$ | async); else avatar">
           <fa-icon icon="user" size="lg"></fa-icon>
           SIGN IN
+        </span>
+        <span  class="cursor-pointer mx-2" *ngIf="(totalPrice$ | async) as totalPrice"
+               (click)="convert(totalPrice.currency === currencies.USD ? currencies.EUR : currencies.USD)">
+          {{ totalPrice.currencyBasedAmount | currency:totalPrice.currency }}
         </span>
         <span routerLink="cart" class="cursor-pointer">
           <fa-icon icon="shopping-cart" size="lg"></fa-icon>
