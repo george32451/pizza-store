@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, filter, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { AngularFireDatabase } from '@angular/fire/database';
 
@@ -27,7 +27,8 @@ export class ProfileComponent implements OnInit {
         select(AuthSelectors.getUser),
         filter(user => !!user),
         tap(user => {
-          this.orders$ = this.fireDatabase.list<Order>(`/orders/${user.uid}`).valueChanges();
+          this.orders$ = this.fireDatabase.list<Order>(`/orders/${user.uid}`).valueChanges()
+            .pipe(catchError(() => of([])));
         })
       );
   }

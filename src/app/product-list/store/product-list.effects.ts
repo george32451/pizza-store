@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { of } from 'rxjs';
+import { combineLatest, of, timer } from 'rxjs';
 import { catchError, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -20,9 +20,9 @@ export class ProductListEffects {
       if (cachedProducts.length) {
         return of(ProductListActions.getProductListSuccess({ products: cachedProducts }));
       }
-      return this.fireDatabase.list('/products').valueChanges().pipe(
+      return combineLatest([timer(1000), this.fireDatabase.list('/products').valueChanges()]).pipe(
         take(1),
-        map((products: Product[]) => ProductListActions.getProductListSuccess({ products })),
+        map(([, products]: [null, Product[]]) => ProductListActions.getProductListSuccess({ products })),
         catchError(() => of(ProductListActions.getProductListFail({ error: 'Something went wrong' })))
       );
     })

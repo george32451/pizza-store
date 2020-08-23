@@ -52,6 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   convert(currency: CurrencyEnum): void {
-    this.store.dispatch(CartActions.convertTotalPriceStart({ currency }));
+    const newCurrency = currency === CurrencyEnum.USD ? CurrencyEnum.EUR : CurrencyEnum.USD;
+    this.store.dispatch(CartActions.convertTotalPriceStart({ currency: newCurrency }));
   }
 }

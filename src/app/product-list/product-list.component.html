@@ -1,8 +1,20 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4 col-md-4 col-xs-12" *ngFor="let product of (products$ | async); trackBy: trackById">
-      <app-product-list-item [product]="product"></app-product-list-item>
-    </div>
+    <ng-container *ngIf="!(isLoading$ | async); else loadingSpinner">
+      <div class="col-lg-4 col-md-4 col-xs-12 cursor-pointer"
+           *ngFor="let product of (products$ | async); trackBy: trackById"
+           [routerLink]="[product.id]">
+        <app-product-list-item [product]="product" [isDescriptionTruncated]="true"></app-product-list-item>
+      </div>
+    </ng-container>
+
   </div>
 </div>
 
+<ng-template #loadingSpinner>
+  <div class="loading-spinner d-flex align-items-center justify-content-center">
+    <div class="spinner-grow" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>

@@ -13,7 +13,7 @@
           <div class="prime-container d-flex justify-content-between align-items-center">
             <div class="text-container d-flex justify-content-between w-100">
               <div class="text-container__title">{{ cartProduct.title }}</div>
-              <div class="product-price-amount">{{ +cartProduct.price.amount * cartProduct.quantity | currency:'USD' }}</div>
+              <div class="product-price-amount">{{ cartProduct | productQuantity | currency:'USD' }}</div>
             </div>
             <div class="plus-minus-container d-flex justify-content-between">
               <app-change-product-quantity
