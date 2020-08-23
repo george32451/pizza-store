@@ -5,7 +5,7 @@
   <h5 class="text-center">Order № {{ order.id }}</h5>
   <div class="card">
     <div class="card-body">
-      <ng-container *ngTemplateOutlet="orderRow; context: { title: 'Address', content: order.address + ', ' + order.address2 }"></ng-container>
+      <ng-container *ngTemplateOutlet="orderRow; context: { title: 'Address', content: order | address }"></ng-container>
       <ng-container *ngTemplateOutlet="orderRow; context: { title: 'Time of order', content: order.timestamp | firebaseTime | date:'medium' }"></ng-container>
       <ng-container *ngTemplateOutlet="orderRow; context: { title: 'Recipient', content: order.client.displayName + ', ' + order.client.email }"></ng-container>
     </div>
@@ -19,7 +19,7 @@
             <span>{{ product.title }}</span>
             <small>{{ product.quantity }} pcs</small>
           </div>
-          <span>{{ +product.price.amount * product.quantity | currency:'USD' }}</span>
+          <span>{{ product | productQuantity | currency:'USD' }}</span>
         </div>
       </div>
     </div>

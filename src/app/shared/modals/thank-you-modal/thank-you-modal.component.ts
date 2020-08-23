@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { BaseModalComponent } from 'shared/modals/base-modal/base-modal.component';
 
 @Component({
@@ -11,9 +9,5 @@ import { BaseModalComponent } from 'shared/modals/base-modal/base-modal.componen
 })
 export class ThankYouModalComponent extends BaseModalComponent {
   @Input() public orderID: number;
-
-  constructor(protected activeModal: NgbActiveModal) {
-    super(activeModal);
-  }
 
 }
