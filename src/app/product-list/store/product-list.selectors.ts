@@ -9,6 +9,11 @@ export const getProducts = createSelector(
   (productList) => productList.products,
 );
 
+export const isProductListLoading = createSelector(
+  selectProductList,
+  (productList) => productList.isLoading,
+);
+
 export const getProductByID = createSelector(
     selectProductList,
     (productList, props) => productList.products.find(product => product.id === props.id),

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
@@ -25,7 +26,7 @@ export class CartEffects {
   addDeliveryCosts$ = createEffect(() => this.actions$.pipe(
     ofType(CartActions.addProductToCart),
     withLatestFrom(this.store.pipe(select(CartSelectors.getCartProducts))),
-    filter(([_, products]) => this.isFirstProductAddedFromCart(products)),
+    filter(([_, products]) => this.isFirstProductAddedToCart(products)),
     map(() => CartActions.addDeliveryCosts({ deliveryCosts }))
     )
   );
@@ -37,13 +38,14 @@ export class CartEffects {
     ).pipe(
       map((currencyRates) => {
         return CartActions.convertTotalPriceSuccess({ currentCurrency: currency, multiplier: currencyRates.rates[currency] });
-      })
+      }),
+      catchError(() => of({ type: 'something went wrong' }))
     )),
   ));
 
   constructor(private actions$: Actions, private store: Store, private http: HttpClient) {}
 
-  private isFirstProductAddedFromCart(products: Product[]): boolean {
+  private isFirstProductAddedToCart(products: Product[]): boolean {
     return products.length === 1;
   }
 

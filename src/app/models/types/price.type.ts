@@ -1,5 +1,7 @@
+import { CurrencyEnum } from '../enums/currency.enum';
+
 export type Price = {
-  currency: string,
+  currency: CurrencyEnum,
   amount: string,
 };
 

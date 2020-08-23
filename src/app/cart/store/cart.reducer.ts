@@ -29,14 +29,14 @@ const cartReducer = createReducer(
       totalPrice: {
         ...state.totalPrice,
         baseAmount: newTotalPrice,
-        currencyBasedAmount: (Number(newTotalPrice) * Number(state.totalPrice.multiplier.toFixed(2))).toFixed(2)
+        currencyBasedAmount: calculateCurrencyBasedAmount(newTotalPrice, state.totalPrice.multiplier)
       }
     };
   }),
   on(CartActions.removeProductFromCart, (state, { id }) => {
     const productToDelete = state.products.find(product => product.id === id);
     const updatedProducts = state.products.filter(product => product.id !== id);
-    const newTotalPrice = subPrice(state.totalPrice.baseAmount, multiplePrice(productToDelete.price.amount, productToDelete.quantity));
+    const newTotalPrice = subPrice(state.totalPrice.baseAmount, multiplyPrice(productToDelete.price.amount, productToDelete.quantity));
     return {
       ...state,
       products: updatedProducts,
@@ -44,24 +44,24 @@ const cartReducer = createReducer(
       totalPrice: {
         ...state.totalPrice,
         baseAmount: newTotalPrice,
-        currencyBasedAmount: (Number(newTotalPrice) * Number(state.totalPrice.multiplier.toFixed(2))).toFixed(2)
+        currencyBasedAmount: calculateCurrencyBasedAmount(newTotalPrice, state.totalPrice.multiplier)
       }
     };
   }),
   on(CartActions.incProductQuantity, ((state, { id }) => {
     const cartProductIndex = state.products.findIndex(product => product.id === id);
-    const updatedCartProduct = { ...state.products[cartProductIndex]  };
-    const updatedProducts = [...state.products];
-    updatedProducts[cartProductIndex] = { ...updatedCartProduct, quantity: updatedCartProduct.quantity + 1 };
-    const newTotalPrice = addPrice(state.totalPrice.baseAmount, updatedCartProduct.price.amount);
+    const newCartProduct = { ...state.products[cartProductIndex]  };
+    const newProducts = [...state.products];
+    newProducts[cartProductIndex] = { ...newCartProduct, quantity: newCartProduct.quantity + 1 };
+    const newTotalPrice = addPrice(state.totalPrice.baseAmount, newCartProduct.price.amount);
     return {
       ...state,
-      products: updatedProducts,
+      products: newProducts,
       totalCount: state.totalCount + 1,
       totalPrice: {
         ...state.totalPrice,
         baseAmount: newTotalPrice,
-        currencyBasedAmount: (Number(newTotalPrice) * Number(state.totalPrice.multiplier.toFixed(2))).toFixed(2)
+        currencyBasedAmount: calculateCurrencyBasedAmount(newTotalPrice, state.totalPrice.multiplier)
       }
     };
   })),
@@ -83,7 +83,7 @@ const cartReducer = createReducer(
       totalPrice: {
         ...state.totalPrice,
         baseAmount: newTotalPrice,
-        currencyBasedAmount: (Number(newTotalPrice) * Number(state.totalPrice.multiplier.toFixed(2))).toFixed(2)
+        currencyBasedAmount: calculateCurrencyBasedAmount(newTotalPrice, state.totalPrice.multiplier)
       }
     };
   })),
@@ -94,7 +94,7 @@ const cartReducer = createReducer(
       totalPrice: {
         ...state.totalPrice,
         baseAmount: newTotalPrice,
-        currencyBasedAmount: (Number(newTotalPrice) * Number(state.totalPrice.multiplier.toFixed(2))).toFixed(2)
+        currencyBasedAmount: calculateCurrencyBasedAmount(newTotalPrice, state.totalPrice.multiplier)
       }
     };
   })),
@@ -105,7 +105,7 @@ const cartReducer = createReducer(
         ...state.totalPrice,
         multiplier: Number(multiplier.toFixed(2)),
         currency: currentCurrency,
-        currencyBasedAmount: (Number(state.totalPrice.baseAmount) * Number(multiplier.toFixed(2))).toFixed(2)
+        currencyBasedAmount: calculateCurrencyBasedAmount(state.totalPrice.baseAmount, multiplier)
       }
     };
   }))),
@@ -117,13 +117,21 @@ export function reducer(state: State | undefined, action: Action): State {
 }
 
 function addPrice(price1: string, price2: string): string {
-  return ((Number(price1) * 100 + Number(price2) * 100) / 100).toFixed(2);
+  return formatPrice((Number(price1) * 100 + Number(price2) * 100) / 100);
 }
 
-function multiplePrice(price: string, times: number): string {
-  return ((Number(price) * 100 * times) / 100).toFixed(2);
+function multiplyPrice(price: string, multiplier: number): string {
+  return formatPrice((Number(price) * 100 * multiplier) / 100);
 }
 
 function subPrice(price1: string, price2: string): string {
-  return ((Number(price1) * 100 - Number(price2) * 100) / 100).toFixed(2);
+  return formatPrice((Number(price1) * 100 - Number(price2) * 100) / 100);
+}
+
+function calculateCurrencyBasedAmount(baseAmount: string, multiplier: number): string {
+  return formatPrice(Number(baseAmount) * Number(multiplier.toFixed(2)));
+}
+
+function formatPrice(price: number): string {
+  return price.toFixed(2);
 }

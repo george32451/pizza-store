@@ -34,6 +34,8 @@ import { FirebaseTimePipe } from './shared/pipes/firebase-time.pipe';
 import { OrderHistoryDetailsComponent } from './auth/order-history/order-history-details/order-history-details.component';
 import { ThankYouModalComponent } from './shared/modals/thank-you-modal/thank-you-modal.component';
 import { BaseModalComponent } from './shared/modals/base-modal/base-modal.component';
+import { AddressPipe } from './shared/pipes/address.pipe';
+import { ProductQuantityPipe } from './shared/pipes/product-quantity.pipe';
 import * as fromApp from './store/app.reducer';
 import * as fromAppMetareducers from './store/app.metareducer';
 
@@ -53,7 +55,9 @@ import * as fromAppMetareducers from './store/app.metareducer';
     FirebaseTimePipe,
     OrderHistoryDetailsComponent,
     ThankYouModalComponent,
-    BaseModalComponent
+    BaseModalComponent,
+    AddressPipe,
+    ProductQuantityPipe
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,13 +10,10 @@ import { OrderHistoryDetailsComponent } from './order-history-details/order-hist
   templateUrl: './order-history.component.html',
   styleUrls: ['./order-history.component.scss']
 })
-export class OrderHistoryComponent implements OnInit {
+export class OrderHistoryComponent {
   @Input() orders: Order[];
 
   constructor(private modalService: NgbModal) { }
-
-  ngOnInit(): void {
-  }
 
   public trackById(index: number, order: Order): number {
     return order.id;

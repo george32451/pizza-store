@@ -8,7 +8,7 @@
           SIGN IN
         </span>
         <ng-container *ngIf="(totalPrice$ | async) as totalPrice">
-          <button class="btn btn-outline-primary" (click)="convert(totalPrice.currency === currencies.USD ? currencies.EUR : currencies.USD)">
+          <button class="btn btn-outline-primary" (click)="convert(totalPrice.currency)">
             <span class="convert-to">Convert to</span> {{ totalPrice.currency === currencies.USD ? '€EUR' : '$USD' }}
           </button>
           <span routerLink="cart" class="cursor-pointer">
