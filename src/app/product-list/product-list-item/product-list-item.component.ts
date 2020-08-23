@@ -15,6 +15,7 @@ import * as CartSelectors from 'cart/store/cart.selectors';
 })
 export class ProductListItemComponent implements OnInit {
   @Input() public readonly product: Product;
+  @Input() public readonly isDescriptionTruncated: boolean;
   public productQuantity$: Observable<number>;
 
   constructor(private store: Store, private addToCartService: AddToCartFacadeService) { }
