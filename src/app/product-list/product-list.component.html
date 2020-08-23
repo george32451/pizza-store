@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <ng-container *ngIf="!(isLoading$ | async); else loadingSpinner">
-      <div class="col-lg-4 col-md-4 col-xs-12 cursor-pointer"
+      <div class="col-lg-4 col-md-6 col-xs-12 cursor-pointer"
            *ngFor="let product of (products$ | async); trackBy: trackById"
            [routerLink]="[product.id]">
         <app-product-list-item [product]="product" [isDescriptionTruncated]="true"></app-product-list-item>
