@@ -2,7 +2,9 @@
 
 Pizza Delivery application with authentication, order history, cart and total price currency convertor\
 \
-This project was created with Angular v10
+This project was created with Angular v10\
+\
+Firebase is used as the backend
 
 ## Steps to run project locally
 1. run `npm install`
