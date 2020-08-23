@@ -1,6 +1,11 @@
 <h3>Order History</h3>
 <div class="card mb-3">
   <div class="card-body">
+    <ng-container *ngIf="!orders?.length">
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="text-muted text-uppercase">you don't have any orders yet</span>
+      </div>
+    </ng-container>
     <ng-container *ngFor="let order of orders; trackBy: trackById; let last=last">
       <div class="row align-items-center">
         <div class="col-lg-5 col-md-12 col-sm-12">
